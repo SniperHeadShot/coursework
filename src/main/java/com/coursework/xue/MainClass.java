@@ -8,23 +8,27 @@ import com.coursework.xue.thread.ThreadPrintZ;
 
 public class MainClass {
     public static void main(String[] args) throws InterruptedException {
+        BinarySemaphore b = new BinarySemaphore();
+
         BinarySemaphore bw = new BinarySemaphore(1);
-        BinarySemaphore bx = new BinarySemaphore(0);
-        Thread tw = new Thread(new ThreadPrintW(bw, bx));
+        BinarySemaphore bx = new BinarySemaphore();
+        Thread tw = new Thread(new ThreadPrintW(bw, bx, b));
         Thread tx = new Thread(new ThreadPrintX(bx, bw));
 
         BinarySemaphore by = new BinarySemaphore(1);
-        BinarySemaphore bz = new BinarySemaphore(0);
-        Thread ty = new Thread(new ThreadPrintY(by, bz));
-        Thread tz = new Thread(new ThreadPrintZ(bz, by));
+        BinarySemaphore bz = new BinarySemaphore();
+        Thread ty = new Thread(new ThreadPrintY(by, bz, b));
+        Thread tz = new Thread(new ThreadPrintZ(bz, by, b));
 
         tw.start();
         tx.start();
+        Thread.sleep(500);
         ty.start();
         tz.start();
 
         // 执行10秒(10 * 1000)后程序退出
-        Thread.sleep(10000);
+        // Thread.sleep(10000);
+        Thread.sleep(10000000);
         System.exit(0);
     }
 }

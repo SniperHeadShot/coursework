@@ -10,11 +10,14 @@ public class ThreadPrintW implements Runnable {
 
     private volatile BinarySemaphore nextSemaphore;
 
+    private volatile BinarySemaphore semaphore;
+
     public static final AtomicInteger COUNTER = new AtomicInteger();
 
-    public ThreadPrintW(BinarySemaphore currentSemaphore, BinarySemaphore nextSemaphore) {
+    public ThreadPrintW(BinarySemaphore currentSemaphore, BinarySemaphore nextSemaphore, BinarySemaphore semaphore) {
         this.currentSemaphore = currentSemaphore;
         this.nextSemaphore = nextSemaphore;
+        this.semaphore = semaphore;
     }
 
     public void run() {
@@ -28,6 +31,7 @@ public class ThreadPrintW implements Runnable {
                 e.printStackTrace();
             } finally {
                 nextSemaphore.V();
+                semaphore.V();
             }
         }
     }
