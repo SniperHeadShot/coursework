@@ -5,9 +5,13 @@ import com.coursework.xue.thread.ThreadPrintW;
 import com.coursework.xue.thread.ThreadPrintX;
 import com.coursework.xue.thread.ThreadPrintY;
 import com.coursework.xue.thread.ThreadPrintZ;
+import org.junit.Test;
 
-public class MainClass {
-    public static void main(String[] args) throws InterruptedException {
+
+public class TestMain {
+
+    @Test
+    public void testPrint() throws InterruptedException {
         BinarySemaphore b = new BinarySemaphore();
 
         BinarySemaphore bw = new BinarySemaphore(1);
@@ -27,8 +31,7 @@ public class MainClass {
         tz.start();
 
         // 执行10秒(10 * 1000)后程序退出
-        // Thread.sleep(10000);
-        Thread.sleep(10000000);
+        Thread.sleep(10000);
         System.exit(0);
     }
 }
