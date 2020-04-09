@@ -7,7 +7,7 @@ import com.coursework.xue.thread.ThreadPrintY;
 import com.coursework.xue.thread.ThreadPrintZ;
 
 public class MainClass {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         BinarySemaphore bw = new BinarySemaphore(1);
         BinarySemaphore bx = new BinarySemaphore(0);
         Thread tw = new Thread(new ThreadPrintW(bw, bx));
@@ -23,12 +23,8 @@ public class MainClass {
         ty.start();
         tz.start();
 
-        try {
-            // 执行10秒(10 * 1000)后结束打印
-            Thread.sleep(10000);
-            System.exit(0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // 执行10秒(10 * 1000)后程序退出
+        Thread.sleep(10000);
+        System.exit(0);
     }
 }
